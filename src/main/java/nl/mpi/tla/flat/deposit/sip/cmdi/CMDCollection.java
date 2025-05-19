@@ -164,7 +164,7 @@ public class CMDCollection extends nl.mpi.tla.flat.deposit.sip.Collection {
     public void setFID(URI fid) throws DepositException {
         boolean m = false;
         for(XdmItem ns:namespaces) {
-            if (fid.toString().startsWith(ns.getStringValue()+":")) {
+            if (fid.toString().startsWith(ns.getStringValue()+"_")) {
                 super.setFID(fid);
                 m = true;
             }

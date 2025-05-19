@@ -145,15 +145,15 @@ public class CMD implements SIPInterface {
             }
             logger.warn("SIP["+this.base+"] has already a Fedora Commons PID["+this.fid+"]! new Fedora Commons PID["+fid+"]");
         }
-        if (fid.toString().startsWith(namespace+":")) {
+        if (fid.toString().startsWith(namespace+"_")) {
             this.fid = fid;
         } else {
             for(XdmItem ns:fedoraNamespaces) {
-                if (fid.toString().startsWith(ns.getStringValue()+":")) {
+                if (fid.toString().startsWith(ns.getStringValue()+"_")) {
                     logger.warn("the FID["+fid+"] has a known namespace, but it's not the active namespace["+namespace+"]!");
                 }
             }
-            throw new DepositException("The URI["+fid+"] isn't a valid FLAT Fedora Commons PID!");
+            throw new DepositException("The URI["+fid+"] isn't a valid FLAT Fedora Commons PID! Namespace:["+namespace+"]");
         }
         dirty();
     }

@@ -193,7 +193,7 @@ public class CMDResource extends Resource {
     public void setFID(URI fid) throws DepositException {
         boolean m = false;
         for(XdmItem ns:namespaces) {
-            if (fid.toString().startsWith(ns+":")) {
+            if (fid.toString().startsWith(ns+"_")) {
                 super.setFID(fid);
                 m = true;
             }

@@ -79,6 +79,7 @@ abstract public class FedoraAction extends AbstractAction {
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(endpoint))
                 .header("Content-Type", "application/sparql-query")
+                .header("Accept", "application/sparql-results+xml")
                 .POST(BodyPublishers.ofString(query))
                 .version(HttpClient.Version.HTTP_1_1)
                 .build();
@@ -131,7 +132,7 @@ abstract public class FedoraAction extends AbstractAction {
         XdmNode res = null;
         URI uri = null;
         try {
-            uri = new URI("http://islandora.traefik.me:8081/fcrepo/rest/"+fid.toString());
+            uri = new URI(fedoraConfig.getString("localServer")+"/"+fid.toString());
         } catch (Exception e) {
             throw new DepositException(e);   
         }
