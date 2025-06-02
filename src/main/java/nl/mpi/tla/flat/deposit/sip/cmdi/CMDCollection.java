@@ -91,7 +91,7 @@ public class CMDCollection extends nl.mpi.tla.flat.deposit.sip.Collection {
                     u = base.resolve(str);
                 boolean m = false;
                 for(XdmItem ns:namespaces) {
-                    if (u.toString().startsWith(ns.getStringValue()+":")) {
+                    if (u.toString().startsWith(ns.getStringValue()+"_")) {
                         this.setFID(u);
                         m = true;
                     }
