@@ -109,7 +109,7 @@ public class DrupalSync extends FedoraAction {
             XdmNode info= fcrepo(lookupFID(sip.getPID()));
             
             String title = Saxon.xpath2string(info, "normalize-space(//dc:title)",null,NAMESPACES);
-            String mimetype = null ;
+            String mimetype = null; //TALK TO MENZO --> original line - Saxon.xpath2string(info, "normalize-space(//ebucore:hasMimeType)",null,NAMESPACES);
 
             System.out.println("XdmNode: "+info.toString());
             String bundlename = title;
@@ -217,7 +217,7 @@ public class DrupalSync extends FedoraAction {
                                         + " ],"
                                         + " \"uri\": ["
                                         + "   {"
-                                        + "       \"value\": \"fedora://lat_12345_comic_1_pdf/OBJ\" "
+                                        + "       \"value\": \"fedora://lat_12345_comic_1_pdf/OBJ\" " //TALK TO MENZO - This is hard coded for now.
                                         + "   }"
                                         + " ],"
                                         + " \"field_pid\": ["
@@ -231,6 +231,7 @@ public class DrupalSync extends FedoraAction {
                                         + "   }"
                                         + " ]"
                                         + "}";  
+                        System.out.println("JsonFileString: "+jsonFileString);
 
                         String endpointFile = "https://islandora.dev/entity/file?_format=json";
                         searchString = "fid";
@@ -243,6 +244,7 @@ public class DrupalSync extends FedoraAction {
                 }
                 
                 //media entity   
+                System.out.print("Media Json String");
                 String jsonMediaString = "{"
                                         + " \"bundle\": ["
                                         + "   {"
@@ -276,7 +278,8 @@ public class DrupalSync extends FedoraAction {
                                         + "       \"target_id\": 1 "
                                         + "   }"
                                         + " ]"
-                                        + "}";    
+                                        + "}";   
+                System.out.print("JsonMediaString: "+jsonMediaString);
 
                 String endpointMedia = "https://islandora.dev/entity/media?_format=json";
 
@@ -353,7 +356,7 @@ public class DrupalSync extends FedoraAction {
                     .uri(URI.create(endpointNode))
                     .header("content-type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(jsonNodeString))
-                    .header("Authorization", "Basic " + Base64.getEncoder().encodeToString(("admin:admin10"
+                    .header("Authorization", "Basic " + Base64.getEncoder().encodeToString(("admin:admin10"  //TALK TO MENZO-- this is hardcoded for now
                             + "").getBytes()))
                     .version(HttpClient.Version.HTTP_1_1)
                     .build();
